@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /painel-ad7x2.html
+
+Sitemap: https://amigosdetalhes.com.br/sitemap.xml
