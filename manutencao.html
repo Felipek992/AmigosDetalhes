@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Em Manutenção</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:#0A0A0A;color:#F5F0E8;font-family:'DM Sans',sans-serif;min-height:100vh;
+      display:flex;align-items:center;justify-content:center;text-align:center;padding:32px;
+      background-image:linear-gradient(rgba(201,168,76,.03) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(201,168,76,.03) 1px,transparent 1px);background-size:52px 52px;}
+    .box{max-width:480px;animation:up .6s ease both;}
+    @keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .ic{font-size:3.5rem;margin-bottom:16px;}
+    h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,8vw,3.2rem);
+      letter-spacing:3px;color:#C9A84C;margin-bottom:12px;}
+    p{font-size:.88rem;color:rgba(245,240,232,.55);line-height:1.7;margin-bottom:24px;}
+    .ret{font-size:.78rem;color:rgba(201,168,76,.6);margin-bottom:24px;
+      background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.12);
+      padding:8px 16px;border-radius:4px;display:inline-block;}
+    .btn{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;
+      padding:14px 28px;text-decoration:none;font-size:.8rem;font-weight:500;
+      letter-spacing:1.5px;text-transform:uppercase;border-radius:3px;transition:background .2s;}
+    .btn:hover{background:#1ea855;}
+    .logo{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;
+      color:rgba(201,168,76,.4);margin-bottom:32px;}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="logo" id="biz-nome">AMIGOS DETALHES</div>
+    <div class="ic">🔧</div>
+    <h1 id="maint-titulo">Voltamos em breve!</h1>
+    <p id="maint-msg">Estamos em manutenção. Em breve estaremos de volta!</p>
+    <div class="ret" id="maint-ret" style="display:none"></div>
+    <a href="#" class="btn" id="maint-wa">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.556 4.121 1.523 5.854L.057 23.882a.5.5 0 0 0 .613.613l6.102-1.605A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.002-1.368l-.36-.214-3.724.979.993-3.63-.235-.374A9.818 9.818 0 1 1 12 21.818z"/>
+      </svg>
+      Falar no WhatsApp
+    </a>
+  </div>
+  <script>
+    try {
+      const d = JSON.parse(sessionStorage.getItem('maint_data')||'{}');
+      if(d.biz)     document.getElementById('biz-nome').textContent    = d.biz.toUpperCase();
+      if(d.titulo)  document.getElementById('maint-titulo').textContent = d.titulo;
+      if(d.mensagem)document.getElementById('maint-msg').textContent    = d.mensagem;
+      if(d.retorno){
+        const ret = document.getElementById('maint-ret');
+        ret.textContent = '📅 Previsão de retorno: ' +
+          new Date(d.retorno+'T12:00:00').toLocaleDateString('pt-BR',
+            {weekday:'long',day:'numeric',month:'long'});
+        ret.style.display='inline-block';
+      }
+      if(d.phone){
+        const msg = encodeURIComponent('Olá! Vi que o site está em manutenção. Quando retornam?');
+        document.getElementById('maint-wa').href = 'https://wa.me/'+d.phone+'?text='+msg;
+      }
+      document.title = (d.biz||'Amigos Detalhes') + ' — Em Manutenção';
+    }catch(e){}
+  </script>
+</body>
+</html>

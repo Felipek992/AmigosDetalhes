@@ -387,17 +387,34 @@
 
     /* ── CALCULADORA ── */
     #calculadora{background:var(--bg);}
-    .calc-box{max-width:640px;margin:0 auto;background:var(--bg3);border:1px solid rgba(201,168,76,.14);border-radius:6px;padding:36px 32px;}
-    .calc-selects{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
-    .calc-result{background:var(--bg2);border:1px solid rgba(201,168,76,.18);border-radius:4px;padding:20px 24px;text-align:center;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:all .3s;}
-    .calc-result-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:6px;}
-    .calc-result-val{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;color:var(--gold);letter-spacing:2px;line-height:1;}
-    .calc-result-info{font-size:.74rem;color:rgba(245,240,232,.45);margin-top:6px;}
-    .calc-result-empty{font-size:.84rem;color:rgba(245,240,232,.3);font-style:italic;}
-    .calc-btn{width:100%;margin-top:14px;background:var(--gold);color:var(--bg);border:none;padding:13px;font-family:'DM Sans',sans-serif;font-size:.76rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all .25s;}
+    .calc-box{max-width:680px;margin:0 auto;background:var(--bg3);border:1px solid rgba(201,168,76,.14);border-radius:6px;padding:36px 32px;}
+    .calc-svcs{display:flex;flex-direction:column;gap:7px;margin-bottom:16px;max-height:280px;overflow-y:auto;padding-right:4px;}
+    .calc-svcs::-webkit-scrollbar{width:4px;} .calc-svcs::-webkit-scrollbar-track{background:transparent;} .calc-svcs::-webkit-scrollbar-thumb{background:rgba(201,168,76,.2);border-radius:2px;}
+    .calc-svc-item{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid rgba(255,255,255,.05);border-radius:4px;padding:9px 12px;cursor:pointer;transition:all .2s;user-select:none;}
+    .calc-svc-item:hover{border-color:rgba(201,168,76,.2);}
+    .calc-svc-item.sel{border-color:var(--gold);background:rgba(201,168,76,.06);}
+    .calc-svc-chk{width:16px;height:16px;border-radius:3px;border:1px solid rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.7rem;}
+    .calc-svc-item.sel .calc-svc-chk{background:var(--gold);border-color:var(--gold);color:var(--bg);}
+    .calc-svc-nome{flex:1;font-size:.82rem;}
+    .calc-svc-preco{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:var(--gold);}
+    .calc-sz-row{margin-bottom:14px;}
+    .calc-cupom-row{display:flex;gap:8px;margin-bottom:14px;}
+    .calc-cupom-row input{flex:1;}
+    .calc-cupom-btn{background:var(--gold);color:var(--bg);border:none;padding:8px 16px;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:1px;cursor:pointer;border-radius:2px;white-space:nowrap;transition:background .2s;}
+    .calc-cupom-btn:hover{background:var(--gold2);}
+    .calc-cupom-msg{font-size:.74rem;margin-bottom:10px;padding:6px 10px;border-radius:3px;}
+    .calc-cupom-msg.ok{background:rgba(34,197,94,.1);color:#22c55e;border:1px solid rgba(34,197,94,.2);}
+    .calc-cupom-msg.err{background:rgba(239,68,68,.08);color:#ef4444;border:1px solid rgba(239,68,68,.2);}
+    .calc-result{background:var(--bg2);border:1px solid rgba(201,168,76,.18);border-radius:4px;padding:18px 20px;margin-bottom:14px;}
+    .calc-result-linha{display:flex;justify-content:space-between;font-size:.8rem;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04);}
+    .calc-result-linha:last-child{border-bottom:none;}
+    .calc-result-total{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--gold);letter-spacing:1px;}
+    .calc-result-desconto{color:#22c55e;font-size:.8rem;}
+    .calc-result-empty{font-size:.84rem;color:rgba(245,240,232,.3);font-style:italic;text-align:center;padding:16px;}
+    .calc-btn{width:100%;background:var(--gold);color:var(--bg);border:none;padding:13px;font-family:'DM Sans',sans-serif;font-size:.76rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all .25s;}
     .calc-btn:hover{background:var(--gold2);}
     .calc-btn:disabled{opacity:.35;cursor:not-allowed;}
-    @media(max-width:600px){.calc-box{padding:22px 16px;}.calc-selects{grid-template-columns:1fr;}}
+    @media(max-width:600px){.calc-box{padding:20px 14px;}}
 
     /* ── SLIDER ANTES/DEPOIS ── */
     .gal-item.has-slider{cursor:ew-resize;}
@@ -442,9 +459,114 @@
     #status-bar.fechado{background:rgba(239,68,68,.08);border-bottom:1px solid rgba(239,68,68,.15);color:#ef4444;}
     #status-bar.almoco{background:rgba(249,115,22,.08);border-bottom:1px solid rgba(249,115,22,.15);color:#f97316;}
     .status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:7px;animation:pulse 2s infinite;}
+
+    /* ── PROMOÇÃO NO HERO ── */
+    .hero-promo{display:none;margin-top:28px;animation:fadeUp .8s .35s ease both;}
+    .hero-promo.show{display:block;}
+    .hero-promo-card{
+      background:linear-gradient(135deg,rgba(249,115,22,.12),rgba(201,168,76,.06));
+      border:1px solid rgba(249,115,22,.35);
+      border-radius:6px;padding:16px 20px;
+      position:relative;overflow:hidden;
+      max-width:480px;
+    }
+    .hero-promo-card::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,var(--promo),var(--gold));
+    }
+    .hero-promo-top{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+    .hero-promo-badge{
+      background:var(--promo);color:#fff;font-size:.58rem;
+      padding:3px 9px;border-radius:2px;font-weight:700;
+      letter-spacing:2px;text-transform:uppercase;flex-shrink:0;
+    }
+    .hero-promo-titulo{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;
+      letter-spacing:2px;color:var(--white);line-height:1;}
+    .hero-promo-desc{font-size:.76rem;color:rgba(245,240,232,.6);
+      margin-bottom:10px;line-height:1.5;}
+    .hero-promo-precos{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;}
+    .hero-promo-orig{font-size:.85rem;text-decoration:line-through;
+      color:rgba(245,240,232,.35);}
+    .hero-promo-novo{font-family:'Bebas Neue',sans-serif;font-size:2rem;
+      color:var(--promo);letter-spacing:1px;line-height:1;}
+    .hero-promo-validade{font-size:.65rem;color:rgba(245,240,232,.4);margin-left:auto;}
+    .hero-promo-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+    .hero-promo-cd{display:flex;align-items:center;gap:4px;
+      background:rgba(0,0,0,.3);padding:4px 10px;border-radius:3px;}
+    .hero-promo-cd-label{font-size:.58rem;letter-spacing:1px;color:rgba(255,255,255,.6);margin-right:3px;}
+    .hero-promo-cd-num{font-family:'Bebas Neue',sans-serif;font-size:.95rem;
+      color:#fff;letter-spacing:1px;font-variant-numeric:tabular-nums;}
+    .hero-promo-cd-sep{color:rgba(255,255,255,.4);font-weight:700;}
+    .btn-promo{background:var(--promo);color:#fff;padding:10px 20px;
+      font-size:.72rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;
+      border:none;cursor:pointer;text-decoration:none;display:inline-block;
+      transition:all .25s;border-radius:2px;flex-shrink:0;}
+    .btn-promo:hover{filter:brightness(1.1);transform:translateY(-1px);}
+    @media(max-width:600px){
+      .hero-promo-card{padding:13px 14px;}
+      .hero-promo-novo{font-size:1.6rem;}
+      .hero-promo-bottom{flex-direction:column;align-items:flex-start;}
+    }
+
+    /* ── PROMOÇÃO NA CALCULADORA ── */
+    .calc-promo-strip{
+      background:linear-gradient(135deg,rgba(249,115,22,.1),rgba(201,168,76,.05));
+      border:1px solid rgba(249,115,22,.25);border-radius:4px;
+      padding:10px 14px;margin-bottom:14px;display:none;
+    }
+    .calc-promo-strip.show{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+    .calc-promo-strip-badge{background:var(--promo);color:#fff;font-size:.58rem;
+      padding:2px 8px;border-radius:2px;font-weight:700;letter-spacing:1.5px;
+      text-transform:uppercase;flex-shrink:0;}
+    .calc-promo-strip-txt{font-size:.78rem;color:rgba(245,240,232,.75);flex:1;}
+    .calc-promo-strip-btn{background:transparent;border:1px solid rgba(249,115,22,.4);
+      color:var(--promo);font-size:.68rem;padding:4px 10px;border-radius:2px;
+      cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all .2s;}
+    .calc-promo-strip-btn:hover{background:var(--promo);color:#fff;}
+
+    /* ── BADGE PROMO NOS SERVIÇOS ── */
+    .badge-promo{background:var(--promo);color:#fff;font-size:.54rem;
+      padding:2px 6px;border-radius:2px;font-weight:700;letter-spacing:1px;
+      text-transform:uppercase;margin-left:5px;vertical-align:middle;}
+
+
+    /* ══ TEMA AZUL (baseado na logo Amigos Detalhes) ══ */
+    [data-tema="azul"] {
+      --gold:        #4A90D9;
+      --gold2:       #6AAEE8;
+      --bg:          #0A0E1A;
+      --bg2:         #0D1220;
+      --bg3:         #141B2D;
+      --white:       #E8EDF5;
+      --grey:        #7A8BA0;
+      --promo:       #3B82F6;
+    }
+
+
+
   </style>
 </head>
 <body>
+
+<!-- MODO MANUTENÇÃO — redireciona para manutencao.html se ativo -->
+<script>
+(function(){
+  try{
+    const cfg=JSON.parse(localStorage.getItem('amigos_cfg')||'{}');
+    if(cfg.manutencao&&cfg.manutencao.ativo){
+      // Passar dados via sessionStorage para a página de manutenção
+      sessionStorage.setItem('maint_data', JSON.stringify({
+        titulo:  cfg.manutencao.titulo  || 'Voltamos em breve!',
+        mensagem:cfg.manutencao.mensagem|| 'Estamos em manutenção.',
+        retorno: cfg.manutencao.retorno || '',
+        phone:   (cfg.phone||'').replace(/\D/g,''),
+        biz:     cfg.businessName||'Amigos Detalhes'
+      }));
+      window.location.replace('manutencao.html');
+    }
+  }catch(e){}
+})();
+</script>
 
 <!-- BANNER DE PROMOÇÃO (aparece quando ativa no admin) -->
 <!-- BOTÃO COMPARTILHAR -->
@@ -452,6 +574,7 @@
   <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
   <span>Compartilhar</span>
 </button>
+
 
 
 <!-- WHATSAPP FLUTUANTE -->
@@ -525,6 +648,33 @@
       <a href="#agendamento" class="btn-pri">Agendar Agora</a>
       <a href="#servicos" class="btn-out">Ver Serviços</a>
     </div>
+
+    <!-- CARD DE PROMOÇÃO NO HERO -->
+    <div class="hero-promo" id="hero-promo">
+      <div class="hero-promo-card">
+        <div class="hero-promo-top">
+          <span class="hero-promo-badge" id="hp-badge">OFERTA</span>
+          <span class="hero-promo-titulo" id="hp-titulo">Promoção Especial</span>
+        </div>
+        <div class="hero-promo-desc" id="hp-desc"></div>
+        <div class="hero-promo-precos">
+          <span class="hero-promo-orig" id="hp-orig"></span>
+          <span class="hero-promo-novo" id="hp-novo"></span>
+          <span class="hero-promo-validade" id="hp-val"></span>
+        </div>
+        <div class="hero-promo-bottom">
+          <div class="hero-promo-cd" id="hp-cd" style="display:none">
+            <span class="hero-promo-cd-label">⏱ ENCERRA EM</span>
+            <span class="hero-promo-cd-num" id="hp-h">00</span>
+            <span class="hero-promo-cd-sep">:</span>
+            <span class="hero-promo-cd-num" id="hp-m">00</span>
+            <span class="hero-promo-cd-sep">:</span>
+            <span class="hero-promo-cd-num" id="hp-s">00</span>
+          </div>
+          <a href="#calculadora" class="btn-promo">Simular Preço</a>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="hero-stats">
     <div><div class="stat-num" id="stat1">1.000+</div><div class="stat-lbl" id="stat1-label">Carros Atendidos</div></div>
@@ -554,26 +704,35 @@
 <section id="calculadora">
   <div class="sec-label">Quanto vai custar?</div>
   <h2 class="sec-title">CALCULE SEU PREÇO</h2>
-  <p class="sec-sub">Selecione o serviço e o porte do seu carro.</p>
+  <p class="sec-sub">Selecione um ou mais serviços e o porte do seu carro.</p>
   <div class="calc-box reveal">
-    <div class="calc-selects">
-      <div class="fg">
-        <label>Serviço</label>
-        <select id="calc-sv" onchange="calcPreco()">
-          <option value="">Selecione o serviço...</option>
-        </select>
-      </div>
+    <!-- Strip de promoção ativa -->
+    <div class="calc-promo-strip" id="calc-promo-strip">
+      <span class="calc-promo-strip-badge" id="cps-badge">OFERTA</span>
+      <span class="calc-promo-strip-txt" id="cps-txt">Promoção ativa! Selecione o serviço para ver o desconto.</span>
+      <button class="calc-promo-strip-btn" id="cps-btn" onclick="selecionarServicoPromo()">Selecionar</button>
+    </div>
+    <div class="calc-sz-row">
       <div class="fg">
         <label>Porte do Carro</label>
         <select id="calc-sz" onchange="calcPreco()">
-          <option value="">Selecione o porte...</option>
+          <option value="">Selecione o porte primeiro...</option>
         </select>
       </div>
     </div>
-    <div class="calc-result" id="calc-result">
-      <div class="calc-result-empty">← Selecione serviço e porte</div>
+    <label style="font-size:.6rem;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px;">Selecione os Serviços</label>
+    <div class="calc-svcs" id="calc-svcs">
+      <div style="color:rgba(245,240,232,.3);font-size:.8rem;font-style:italic;text-align:center;padding:12px">Selecione o porte para ver os serviços</div>
     </div>
-    <button class="calc-btn" id="calc-ag-btn" disabled onclick="agendarCalc()">Agendar Este Serviço</button>
+    <div class="calc-cupom-row">
+      <input type="text" id="calc-cupom" placeholder="Código do cupom (opcional)" style="text-transform:uppercase;letter-spacing:1px">
+      <button class="calc-cupom-btn" onclick="aplicarCupom()">Aplicar</button>
+    </div>
+    <div id="calc-cupom-msg" style="display:none" class="calc-cupom-msg"></div>
+    <div class="calc-result" id="calc-result">
+      <div class="calc-result-empty">← Selecione o porte e pelo menos um serviço</div>
+    </div>
+    <button class="calc-btn" id="calc-ag-btn" disabled onclick="agendarCalc()">Agendar Serviços Selecionados</button>
   </div>
 </section>
 
@@ -686,7 +845,7 @@
         </div>
       </div>
       <div class="frow">
-        <div class="fg"><label>Serviço</label><select id="fsv"><option value="">Selecione...</option></select></div>
+        <div class="fg"><label>Serviço</label><select id="fsv" onchange="gerarHorarios()"><option value="">Selecione...</option></select></div>
         <div class="fg"><label>Data Preferida</label><input type="date" id="fd" onchange="gerarHorarios()"></div>
       </div>
       <div class="frow">
@@ -697,9 +856,8 @@
           </select>
         </div>
         <div class="fg" style="display:flex;flex-direction:column;justify-content:flex-end;">
-          <div style="background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.1);border-radius:3px;padding:9px 12px;font-size:.72rem;color:rgba(245,240,232,.55);line-height:1.55;">
-            🕐 Atendemos <strong style="color:var(--gold)">08h–12h</strong> e <strong style="color:var(--gold)">13h–17h</strong><br>
-            Último horário: <strong style="color:var(--gold)">16h30</strong>
+          <div style="background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.1);border-radius:3px;padding:9px 12px;font-size:.72rem;color:rgba(245,240,232,.55);line-height:1.55;" id="aviso-horario">
+            🕐 Selecione o serviço e a data para ver os horários disponíveis.
           </div>
         </div>
       </div>
@@ -741,6 +899,34 @@
 
 <script src="config-site.js"></script>
 <script>
+// ─── IndexedDB — fotos e histórico ─────────────────────────────────────────
+const IDB_HIST = (() => {
+  const DB='amigos_hist', ST='agendamentos';
+  let _db=null;
+  function open(){
+    return new Promise((res,rej)=>{
+      if(_db) return res(_db);
+      const req=indexedDB.open(DB,1);
+      req.onupgradeneeded=e=>{
+        const db=e.target.result;
+        if(!db.objectStoreNames.contains(ST))
+          db.createObjectStore(ST,{keyPath:'id',autoIncrement:true});
+      };
+      req.onsuccess=e=>{_db=e.target.result;res(_db);};
+      req.onerror=e=>rej(e);
+    });
+  }
+  async function add(item){
+    const db=await open();
+    return new Promise((res,rej)=>{
+      const tx=db.transaction(ST,'readwrite');
+      tx.objectStore(ST).add({...item,novo:true,status:'pendente',ts:Date.now()});
+      tx.oncomplete=res; tx.onerror=rej;
+    });
+  }
+  return {add};
+})();
+
 // ─── IndexedDB — leitura de fotos ───────────────────────────────────────
 const IDB = (() => {
   const DB = 'amigos_fotos', ST = 'fotos';
@@ -807,6 +993,7 @@ async function render() {
   const c = getConfig();
 
   applyCores(c.cores);
+  initTema(c);
 
   // Básico
   const biz = c.businessName || 'Amigos Detalhes';
@@ -827,8 +1014,12 @@ async function render() {
 
   // Promoção ativa
   const promoAtiva = (c.promocoes||[]).find(p => p.ativa);
+  window._promoAtiva = promoAtiva || null; // guardar globalmente para uso em outras funções
   const banner = document.getElementById('promo-banner');
+  const heroPr = document.getElementById('hero-promo');
+
   if (promoAtiva) {
+    // ── Banner topo (mantém como aviso discreto) ──
     document.getElementById('pb-badge').textContent  = promoAtiva.badge   || 'PROMOÇÃO';
     document.getElementById('pb-titulo').textContent = promoAtiva.titulo  || '';
     document.getElementById('pb-orig').textContent   = promoAtiva.precoOriginal || '';
@@ -838,25 +1029,72 @@ async function render() {
         'válida até ' + new Date(promoAtiva.validade+'T12:00:00').toLocaleDateString('pt-BR');
     }
     banner.classList.add('show');
-    // Countdown
-    if (promoAtiva.validade) {
-      const cdEl = document.getElementById('pb-countdown');
-      cdEl.style.display = 'inline-flex';
-      if (window._cdTimer) clearInterval(window._cdTimer);
-      window._cdTimer = setInterval(()=>{
-        const fim = new Date(promoAtiva.validade+'T23:59:59');
-        const diff = fim - new Date();
-        if (diff <= 0) { clearInterval(window._cdTimer); cdEl.style.display='none'; return; }
-        const h = Math.floor(diff/3600000);
-        const m = Math.floor((diff%3600000)/60000);
-        const s = Math.floor((diff%60000)/1000);
-        document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
-        document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
-        document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
-      }, 1000);
+
+    // ── Card no Hero ──
+    if (heroPr) {
+      const setTxt = (id,v) => { const e=document.getElementById(id); if(e) e.textContent=v||''; };
+      setTxt('hp-badge',  promoAtiva.badge   || 'OFERTA');
+      setTxt('hp-titulo', promoAtiva.titulo  || 'Promoção Especial');
+      const descParts = [promoAtiva.servico, promoAtiva.desc].filter(Boolean).join(' — ');
+      setTxt('hp-desc',   descParts);
+      setTxt('hp-orig',   promoAtiva.precoOriginal || '');
+      setTxt('hp-novo',   promoAtiva.preco || '');
+      if (promoAtiva.validade) {
+        setTxt('hp-val', 'válida até '+new Date(promoAtiva.validade+'T12:00:00').toLocaleDateString('pt-BR'));
+      }
+      heroPr.classList.add('show');
+
+      // Countdown no Hero (sincronizado)
+      if (promoAtiva.validade) {
+        const cdEl = document.getElementById('hp-cd');
+        if (cdEl) cdEl.style.display = 'flex';
+        if (window._cdTimer) clearInterval(window._cdTimer);
+        window._cdTimer = setInterval(()=>{
+          const fim  = new Date(promoAtiva.validade+'T23:59:59');
+          const diff = fim - new Date();
+          if (diff <= 0) {
+            clearInterval(window._cdTimer);
+            if(cdEl) cdEl.style.display='none';
+            document.getElementById('pb-countdown').style.display='none';
+            return;
+          }
+          const hh = Math.floor(diff/3600000);
+          const mm = Math.floor((diff%3600000)/60000);
+          const ss = Math.floor((diff%60000)/1000);
+          const pad = n => String(n).padStart(2,'0');
+          // Hero
+          ['hp-h','hp-m','hp-s'].forEach((id,i)=>{
+            const el=document.getElementById(id);
+            if(el) el.textContent = pad([hh,mm,ss][i]);
+          });
+          // Banner topo
+          ['cd-h','cd-m','cd-s'].forEach((id,i)=>{
+            const el=document.getElementById(id);
+            if(el) el.textContent = pad([hh,mm,ss][i]);
+          });
+          document.getElementById('pb-countdown').style.display='inline-flex';
+        }, 1000);
+      }
     }
+
+    // ── Strip na calculadora ──
+    const strip = document.getElementById('calc-promo-strip');
+    if (strip) {
+      document.getElementById('cps-badge').textContent = promoAtiva.badge || 'OFERTA';
+      const stripTxt = promoAtiva.titulo + (promoAtiva.preco ? ' — ' + promoAtiva.preco : '')
+        + (promoAtiva.precoOriginal ? ' (antes ' + promoAtiva.precoOriginal + ')' : '');
+      document.getElementById('cps-txt').textContent = stripTxt;
+      strip.classList.add('show');
+    }
+
+    // ── Badge nos serviços da tabela ──
+    // Feito dinamicamente no render das categorias (ver adiante)
+
   } else {
     banner.classList.remove('show');
+    if (heroPr) heroPr.classList.remove('show');
+    const strip = document.getElementById('calc-promo-strip');
+    if (strip) strip.classList.remove('show');
     if (window._cdTimer) clearInterval(window._cdTimer);
   }
 
@@ -883,6 +1121,19 @@ async function render() {
   if (c.servicesSub) document.getElementById('sec-sub-svc').textContent = c.servicesSub;
   const selSv = document.getElementById('fsv');
   selSv.innerHTML = '<option value="">Selecione...</option>';
+  // Adicionar promoção ativa como primeira opção destacada
+  if (promoAtiva) {
+    const oPromo = document.createElement('option');
+    oPromo.value = promoAtiva.servico || promoAtiva.titulo;
+    oPromo.textContent = '🔥 ' + promoAtiva.titulo + (promoAtiva.preco?' — '+promoAtiva.preco:'') + ' (PROMOÇÃO)';
+    oPromo.style.color = '#f97316';
+    oPromo.style.fontWeight = '600';
+    selSv.appendChild(oPromo);
+    const sep = document.createElement('option');
+    sep.disabled = true;
+    sep.textContent = '──────────────';
+    selSv.appendChild(sep);
+  }
   const sizeKeys = sizes.map(s=>s.key);
 
   document.getElementById('catalogo').innerHTML = (c.services||[]).map(cat => {
@@ -908,7 +1159,7 @@ async function render() {
       }
       return `<tr class="${sv.destaque?'dest':''}">
         <td class="td-n">
-          <div class="nome">${sv.nome}${sv.destaque?' <span class="badge-pop">Popular</span>':''}</div>
+          <div class="nome">${sv.nome}${sv.destaque?' <span class="badge-pop">Popular</span>':''}${window._promoAtiva&&window._promoAtiva.servico===sv.nome?' <span class="badge-promo">🔥 PROMOÇÃO</span>':''}</div>
           <div class="desc">${sv.desc||''}</div>
         </td>
         ${pcols}
@@ -938,7 +1189,7 @@ async function render() {
       }
       return `<div class="svc-card ${sv.destaque?'dest':''}">
         <div class="svc-card-top">
-          <div class="svc-card-nome">${sv.nome}${sv.destaque?' <span class="badge-pop">Popular</span>':''}</div>
+          <div class="svc-card-nome">${sv.nome}${sv.destaque?' <span class="badge-pop">Popular</span>':''}${window._promoAtiva&&window._promoAtiva.servico===sv.nome?' <span class="badge-promo">🔥 PROMOÇÃO</span>':''}</div>
         </div>
         <div class="svc-card-desc">${sv.desc||''}</div>
         <div class="svc-card-precos">${precosHtml}</div>
@@ -1023,6 +1274,17 @@ async function render() {
   ).join('') || Array(6).fill('<div class="ig-item"><div class="ig-ph">📷</div></div>').join('');
 
   // Agendamento
+  // Aviso de horário dinâmico
+  const avisoEl = document.getElementById('aviso-horario');
+  if (avisoEl && c.agenda && c.agenda.dias) {
+    const ativos = (c.agenda.dias||[]).filter(d=>d.ativo);
+    if (ativos.length) {
+      const nomes = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+      const diasStr = ativos.map(d=>nomes[d.dow]).join(', ');
+      avisoEl.innerHTML = `🕐 Atendemos: <strong style="color:var(--gold)">${diasStr}</strong> — Selecione serviço e data para ver horários disponíveis.`;
+    }
+  }
+
   if (c.bookingTitle) document.getElementById('book-title').innerHTML = c.bookingTitle;
   if (c.bookingDesc)  document.getElementById('book-desc').textContent = c.bookingDesc;
   if (c.feat1Title)   document.getElementById('f1t').textContent = c.feat1Title;
@@ -1101,144 +1363,305 @@ async function render() {
 
 
 // ═══════════════════════════════════════
-// HORÁRIOS DE AGENDAMENTO
+// HORÁRIOS — usa agenda configurada no painel
 // ═══════════════════════════════════════
+
+// Converte "HH:MM" → minutos desde meia-noite
+function hm2min(hm){ const [h,m]=hm.split(':').map(Number); return h*60+m; }
+// Converte minutos → "HH:MM"
+function min2hm(m){ return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0'); }
+
 function gerarHorarios() {
   const dtVal = document.getElementById('fd').value;
-  const sel   = document.getElementById('fh');
-  if (!dtVal) { sel.innerHTML = '<option value="">Selecione a data primeiro...</option>'; return; }
+  const svNome = document.getElementById('fsv').value;
+  const sel    = document.getElementById('fh');
 
-  const dia = new Date(dtVal + 'T12:00:00');
-  const dow = dia.getDay(); // 0=Dom, 6=Sáb
-
-  // Horários disponíveis por turno
-  // Manhã: 08:00–11:30 (a cada 30min) — último às 11:30 para carro entrar até 12h
-  // Tarde: 13:00–16:30 (a cada 30min) — último às 16:30 conforme regra
-  const manha = [];
-  const tarde = [];
-
-  if (dow === 0) { // Domingo fechado
-    sel.innerHTML = '<option value="">Não atendemos aos domingos</option>';
+  if (!dtVal) {
+    sel.innerHTML = '<option value="">Selecione a data primeiro...</option>';
     return;
   }
 
-  // Manhã: 08:00 até 11:30
-  for (let h = 8; h <= 11; h++) {
-    for (let m = 0; m < 60; m += 30) {
-      if (h === 11 && m > 30) break;
-      manha.push(`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`);
-    }
+  const c      = getConfig();
+  const agenda = c.agenda || {};
+  const dias   = agenda.dias || [];
+  const bloq   = agenda.bloqueios || [];
+  const durac  = agenda.duracoes  || {};
+  const antec  = agenda.antecedenciaHoras || 2;
+  const msgInd = agenda.msgIndisponivel || 'Entre em contato pelo WhatsApp para verificar disponibilidade.';
+
+  const dia    = new Date(dtVal + 'T12:00:00');
+  const dow    = dia.getDay();
+
+  // Checar bloqueio
+  const isBloq = bloq.some(b => b.data === dtVal);
+  if (isBloq) {
+    const motivo = (bloq.find(b=>b.data===dtVal)||{}).motivo;
+    sel.innerHTML = `<option value="">🚫 Data bloqueada${motivo?' — '+motivo:''}</option>`;
+    return;
   }
 
-  // Tarde: 13:00 até 16:30 (sábado só manhã)
-  if (dow !== 6) {
-    for (let h = 13; h <= 16; h++) {
-      for (let m = 0; m < 60; m += 30) {
-        if (h === 16 && m > 30) break;
-        tarde.push(`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`);
-      }
+  // Buscar config do dia
+  const confDia = dias.find(d => d.dow === dow);
+  if (!confDia || !confDia.ativo || !confDia.turnos || !confDia.turnos.length) {
+    sel.innerHTML = `<option value="">Não atendemos neste dia da semana</option>`;
+    return;
+  }
+
+  // Duração do serviço selecionado (padrão 60min)
+  const duracaoMin = svNome ? (durac[svNome] || 60) : 60;
+
+  // Antecedência mínima
+  const agora   = new Date();
+  const hojeStr = agora.toLocaleDateString('sv-SE', {timeZone:'America/Fortaleza'});
+  const isHoje  = dtVal === hojeStr;
+  const agoraMin = isHoje
+    ? agora.toLocaleTimeString('pt-BR',{timeZone:'America/Fortaleza',hour:'2-digit',minute:'2-digit'})
+        .split(':').map(Number).reduce((h,m)=>h*60+m)
+      + antec * 60
+    : 0;
+
+  // Gerar slots por turno
+  const grupos = [];
+  confDia.turnos.forEach(turno => {
+    const ini = hm2min(turno.ini);
+    const fim = hm2min(turno.fim);
+    const slots = [];
+    // Último slot: fim - duração (garante que termina dentro do turno)
+    for (let t = ini; t + duracaoMin <= fim; t += 30) {
+      if (isHoje && t < agoraMin) continue; // já passou + antecedência
+      slots.push(min2hm(t));
     }
+    if (slots.length) {
+      grupos.push({
+        label: `${turno.ini.replace(':','h')} – ${turno.fim.replace(':','h')}`,
+        slots
+      });
+    }
+  });
+
+  if (!grupos.length) {
+    sel.innerHTML = `<option value="">${msgInd}</option>`;
+    return;
   }
 
   let opts = '<option value="">Selecione o horário...</option>';
-  if (manha.length) {
-    opts += '<optgroup label="☀️ Manhã (08h–12h)">';
-    manha.forEach(t => opts += `<option value="${t}">${t}</option>`);
-    opts += '</optgroup>';
-  }
-  if (tarde.length) {
-    opts += '<optgroup label="🌤 Tarde (13h–17h)">';
-    tarde.forEach(t => { 
-      const aviso = t === '16:30' ? ' — último horário' : '';
-      opts += `<option value="${t}">${t}${aviso}</option>`;
+  grupos.forEach(g => {
+    opts += `<optgroup label="🕐 ${g.label}">`;
+    g.slots.forEach(s => {
+      const fim = min2hm(hm2min(s) + duracaoMin);
+      opts += `<option value="${s}">${s} → ${fim}${svNome?' ('+duracaoMin+'min)':''}</option>`;
     });
     opts += '</optgroup>';
-  }
-  if (dow === 6) {
-    opts += '<option disabled>— Sábado: somente manhã —</option>';
-  }
+  });
   sel.innerHTML = opts;
 }
 
 // ═══════════════════════════════════════
-// CALCULADORA DE PREÇO
+// CALCULADORA — multi-serviço + cupom
 // ═══════════════════════════════════════
-let _calcData = []; // {nome, type, precos, preco, cat}
+let _calcData   = [];
+let _calcSel    = new Set(); // índices selecionados
+let _calcCupom  = null;      // {desconto, codigo}
+
+// Selecionar serviço da promoção na calculadora
+function selecionarServicoProm() {
+  if (!window._promoAtiva) return;
+  const nomePromo = window._promoAtiva.servico || window._promoAtiva.titulo;
+  // Achar o índice na _calcData
+  const idx = _calcData.findIndex(sv =>
+    sv.nome.replace('📦 ','') === nomePromo || sv.nome === nomePromo
+  );
+  if (idx >= 0) {
+    _calcSel = new Set([idx]);
+    calcPreco();
+    // Rolar para a calculadora se não estiver visível
+    document.getElementById('calculadora')?.scrollIntoView({behavior:'smooth'});
+  }
+}
 
 function popularCalculadora(c) {
   _calcData = [];
-  const selSv = document.getElementById('calc-sv');
+  _calcSel  = new Set();
+  _calcCupom = null;
+
   const selSz = document.getElementById('calc-sz');
-  if (!selSv || !selSz) return;
+  if (!selSz) return;
 
-  selSv.innerHTML = '<option value="">Selecione o serviço...</option>';
-  (c.services||[]).forEach(cat => {
-    const grp = document.createElement('optgroup');
-    grp.label = (cat.icone||'') + ' ' + cat.categoria;
-    (cat.servicos||[]).forEach((sv, i) => {
-      const idx = _calcData.length;
-      _calcData.push({...sv, cat: cat.categoria});
-      const o = document.createElement('option');
-      o.value = idx; o.textContent = sv.nome;
-      grp.appendChild(o);
-    });
-    selSv.appendChild(grp);
-  });
-  (c.pacotes||[]).forEach((p, i) => {
-    const idx = _calcData.length;
-    _calcData.push({nome: p.nome, type: 'tabela', precos: p.precos||{}, cat: 'Pacote'});
-    const o = document.createElement('option');
-    o.value = idx; o.textContent = '📦 ' + p.nome;
-    selSv.appendChild(o);
-  });
-
-  selSz.innerHTML = '<option value="">Selecione o porte...</option>';
+  // Ao trocar o porte, limpar seleção para evitar preços desatualizados
+  selSz.addEventListener('change', ()=>{ _calcSel = new Set(); }, {once:false});
+  selSz.innerHTML = '<option value="">Selecione o porte primeiro...</option>';
   (c.carSizes||[]).forEach(s => {
     const o = document.createElement('option');
-    o.value = s.key; o.textContent = s.key + ' — ' + s.label + ' (' + (s.example||'') + ')';
+    o.value = s.key; o.textContent = s.key + ' — ' + s.label;
     selSz.appendChild(o);
+  });
+
+  (c.services||[]).forEach(cat => {
+    (cat.servicos||[]).forEach(sv => {
+      _calcData.push({...sv, cat: cat.categoria, icone: cat.icone||'🔧'});
+    });
+  });
+  (c.pacotes||[]).forEach(p => {
+    _calcData.push({nome:'📦 '+p.nome, type:'tabela', precos:p.precos||{}, cat:'Pacote', icone:'📦'});
   });
 }
 
 function calcPreco() {
-  const idxSv = document.getElementById('calc-sv').value;
-  const sz    = document.getElementById('calc-sz').value;
-  const res   = document.getElementById('calc-result');
-  const btn   = document.getElementById('calc-ag-btn');
+  const sz  = document.getElementById('calc-sz').value;
+  const res = document.getElementById('calc-result');
+  const btn = document.getElementById('calc-ag-btn');
 
-  if (idxSv === '' || !sz) {
-    res.innerHTML = '<div class="calc-result-empty">← Selecione serviço e porte</div>';
+  // Renderizar lista de serviços após porte ser escolhido
+  // Se o porte mudou, _calcSel já foi limpo pelo event listener
+  const svcsEl = document.getElementById('calc-svcs');
+  if (svcsEl && sz) {
+    svcsEl.innerHTML = _calcData.map((sv,i) => {
+      let precoStr = '';
+      if (sv.type==='tabela') precoStr = (sv.precos||{})[sz] || '—';
+      else if (sv.type==='fixo') precoStr = sv.preco || '—';
+      else precoStr = 'Consultar';
+      return `<div class="calc-svc-item${_calcSel.has(i)?' sel':''}" onclick="toggleCalcSvc(${i})">
+        <div class="calc-svc-chk">${_calcSel.has(i)?'✓':''}</div>
+        <span class="calc-svc-nome">${sv.icone||''} ${sv.nome}${window._promoAtiva&&window._promoAtiva.servico===sv.nome?' <span class="badge-promo" style="font-size:.52rem">🔥 PROMO</span>':''}</span>
+        <span class="calc-svc-preco">${precoStr}</span>
+      </div>`;
+    }).join('');
+  } else if(svcsEl && !sz){
+    svcsEl.innerHTML='<div style="color:rgba(245,240,232,.3);font-size:.8rem;font-style:italic;text-align:center;padding:12px">Selecione o porte para ver os serviços</div>';
+  }
+
+  if (!sz || _calcSel.size === 0) {
+    res.innerHTML = '<div class="calc-result-empty">← Selecione o porte e pelo menos um serviço</div>';
     btn.disabled = true;
     return;
   }
 
-  const sv = _calcData[parseInt(idxSv)];
-  if (!sv) return;
+  // Calcular total
+  let total = 0;
+  let linhas = [];
+  let temConsulta = false;
 
-  let preco = '', info = '';
-  if (sv.type === 'tabela') {
-    preco = (sv.precos||{})[sz] || '—';
-    info  = 'Porte ' + sz + ' — ' + sv.cat;
-  } else if (sv.type === 'fixo') {
-    preco = sv.preco || '—';
-    info  = 'Preço único — ' + sv.cat;
-  } else {
-    preco = 'A consultar';
-    info  = 'Entre em contato para orçamento';
+  _calcSel.forEach(i => {
+    const sv = _calcData[i];
+    let val = 0, precoStr = '';
+    if (sv.type==='tabela') {
+      precoStr = (sv.precos||{})[sz] || '—';
+      val = parseFloat((precoStr||'').replace(/[^0-9,.]/g,'').replace(',','.')) || 0;
+    } else if (sv.type==='fixo') {
+      precoStr = sv.preco || '—';
+      val = parseFloat((precoStr||'').replace(/[^0-9,.]/g,'').replace(',','.')) || 0;
+    } else {
+      precoStr = 'A consultar';
+      temConsulta = true;
+    }
+    total += val;
+    linhas.push({nome: sv.nome, preco: precoStr, val});
+  });
+
+  // Verificar se algum serviço selecionado tem promoção ativa
+  let promoAplicada = null;
+  if (window._promoAtiva && !_calcCupom) {
+    const nomePromo = (window._promoAtiva.servico || window._promoAtiva.titulo || '').toLowerCase();
+    const temPromo = [..._calcSel].some(i => (_calcData[i]?.nome||'').toLowerCase().includes(nomePromo));
+    if (temPromo && window._promoAtiva.preco && window._promoAtiva.precoOriginal) {
+      // Calcular desconto baseado nos preços da promoção
+      const vNovo = parseFloat((window._promoAtiva.preco||'').replace(/[^0-9,.]/g,'').replace(',','.')) || 0;
+      const vOrig = parseFloat((window._promoAtiva.precoOriginal||'').replace(/[^0-9,.]/g,'').replace(',','.')) || 0;
+      if (vOrig > vNovo && vOrig > 0) {
+        const pct = Math.round((vOrig - vNovo) / vOrig * 100);
+        promoAplicada = {titulo: window._promoAtiva.titulo, pct, economia: vOrig - vNovo};
+      }
+    }
   }
 
-  res.innerHTML = `
-    <div class="calc-result-label">Estimativa de Preço</div>
-    <div class="calc-result-val">${preco}</div>
-    <div class="calc-result-info">${info}</div>`;
-  btn.disabled = (preco === '—');
+  // Aplicar cupom OU promoção (cupom tem prioridade)
+  let desconto = 0;
+  if (_calcCupom && total > 0) {
+    desconto = Math.round(total * _calcCupom.desconto / 100 * 100) / 100;
+  } else if (promoAplicada && total > 0) {
+    desconto = Math.round(total * promoAplicada.pct / 100 * 100) / 100;
+  }
+  const totalFinal = total - desconto;
+
+  let html = linhas.map(l =>
+    `<div class="calc-result-linha"><span>${l.nome}</span><span style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold)">${l.preco}</span></div>`
+  ).join('');
+
+  if (linhas.length > 1 && !temConsulta) {
+    html += `<div class="calc-result-linha" style="margin-top:4px;padding-top:8px;border-top:1px solid rgba(201,168,76,.2)">
+      <span style="font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--grey)">Subtotal</span>
+      <span style="font-family:'Bebas Neue',sans-serif;font-size:1rem">R$ ${total.toFixed(2).replace('.',',')}</span>
+    </div>`;
+  }
+  if (desconto > 0) {
+    const descLabel = _calcCupom
+      ? `🎟 Cupom ${_calcCupom.codigo} (${_calcCupom.desconto}% off)`
+      : `🔥 ${promoAplicada?.titulo||'Promoção'} (${promoAplicada?.pct||0}% off)`;
+    html += `<div class="calc-result-linha calc-result-desconto">
+      <span>${descLabel}</span>
+      <span>− R$ ${desconto.toFixed(2).replace('.',',')}</span>
+    </div>`;
+  }
+  if (!temConsulta) {
+    html += `<div class="calc-result-linha" style="margin-top:6px">
+      <span style="font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--grey)">Total Estimado</span>
+      <span class="calc-result-total">R$ ${totalFinal.toFixed(2).replace('.',',')}</span>
+    </div>`;
+  } else {
+    html += `<div style="font-size:.75rem;color:var(--grey);text-align:center;margin-top:8px">* Alguns serviços precisam de orçamento — entre em contato.</div>`;
+  }
+
+  res.innerHTML = html;
+  btn.disabled = false;
+}
+
+function toggleCalcSvc(i) {
+  if (_calcSel.has(i)) _calcSel.delete(i);
+  else _calcSel.add(i);
+  calcPreco();
+}
+
+function aplicarCupom() {
+  const cod = (document.getElementById('calc-cupom').value||'').trim().toUpperCase();
+  const msgEl = document.getElementById('calc-cupom-msg');
+  if (!cod) { msgEl.style.display='none'; return; }
+
+  const c = getConfig();
+  const cupons = c.cupons || [];
+  const cp = cupons.find(x => x.codigo===cod && x.ativo!==false);
+
+  if (!cp) {
+    msgEl.textContent = '❌ Cupom inválido ou inativo.';
+    msgEl.className = 'calc-cupom-msg err';
+    msgEl.style.display = 'block';
+    _calcCupom = null; calcPreco(); return;
+  }
+  if ((cp.usosRealizados||0) >= (cp.usosMax||999)) {
+    msgEl.textContent = '❌ Este cupom atingiu o limite de usos.';
+    msgEl.className = 'calc-cupom-msg err';
+    msgEl.style.display = 'block';
+    _calcCupom = null; calcPreco(); return;
+  }
+
+  _calcCupom = {codigo: cp.codigo, desconto: cp.desconto||0};
+  msgEl.textContent = `✅ Cupom aplicado! ${cp.desconto}% de desconto. ${cp.descricao||''}`;
+  msgEl.className = 'calc-cupom-msg ok';
+  msgEl.style.display = 'block';
+  calcPreco();
 }
 
 function agendarCalc() {
-  const idxSv = document.getElementById('calc-sv').value;
-  if (idxSv === '') return;
-  const sv = _calcData[parseInt(idxSv)];
-  if (sv) agendar(sv.nome);
+  if (_calcSel.size === 0) return;
+  const nomes = [..._calcSel].map(i => _calcData[i].nome.replace('📦 ','')).join(', ');
+  // Preencher campo de serviço no form
+  const fsv = document.getElementById('fsv');
+  if (fsv) {
+    // Selecionar primeiro serviço
+    const primeiro = _calcData[[..._calcSel][0]].nome.replace('📦 ','');
+    for (let o of fsv.options) { if(o.value===primeiro){o.selected=true;break;} }
+  }
+  document.getElementById('agendamento').scrollIntoView({behavior:'smooth'});
+  setTimeout(()=>document.getElementById('fn').focus(), 600);
 }
 
 // ═══════════════════════════════════════
@@ -1327,6 +1750,20 @@ function statusFuncionamento() {
   if (!window._statusTimer) window._statusTimer = setInterval(statusFuncionamento, 60000);
 }
 
+
+// ═══════════════════════════════════════
+// SISTEMA DE TEMAS
+// ═══════════════════════════════════════
+function aplicarTema(tema) {
+  document.documentElement.setAttribute('data-tema', tema);
+}
+
+function initTema(c) {
+  // Tema definido pelo admin — cliente não troca
+  const temaPadrao = (c && c.temaPadrao) || 'azul';
+  aplicarTema(temaPadrao);
+}
+
 function abrirWA(){
   const c = getConfig();
   const num = (c.phone||'').replace(/\D/g,'');
@@ -1341,7 +1778,7 @@ function agendar(nome){
   setTimeout(()=>document.getElementById('fn').focus(), 600);
 }
 
-function submitBooking(){
+async function submitBooking(){
   const name = document.getElementById('fn').value.trim();
   const ph   = document.getElementById('fp').value.trim();
   const car  = document.getElementById('fc').value.trim();
@@ -1370,7 +1807,23 @@ function submitBooking(){
     ? 'https://api.whatsapp.com/send?phone='+biz+'&text='+encodeURIComponent(msg)
     : 'https://api.whatsapp.com/send?text='+encodeURIComponent(msg);
   window.open(url,'_blank');
-  // Redirecionar para página de obrigado se existir, senão overlay
+
+  // Salvar no histórico (IndexedDB)
+  try {
+    await IDB_HIST.add({nome:name, whatsapp:ph, veiculo:car, porte:sz, servico:sv, data:dt?new Date(dt+'T12:00:00').toLocaleDateString('pt-BR'):'', horario:hr, obs, cupom:_calcCupom?_calcCupom.codigo:''});
+  } catch(e){}
+
+  // Incrementar uso do cupom se aplicado
+  if (_calcCupom) {
+    const cfg = getConfig();
+    const cp = (cfg.cupons||[]).find(x=>x.codigo===_calcCupom.codigo);
+    if(cp){ cp.usosRealizados=(cp.usosRealizados||0)+1; localStorage.setItem('amigos_cfg',JSON.stringify(cfg)); }
+    _calcCupom = null;
+    const cm=document.getElementById('calc-cupom-msg'); if(cm) cm.style.display='none';
+    const ci=document.getElementById('calc-cupom'); if(ci) ci.value='';
+  }
+
+  // Redirecionar para página de obrigado
   setTimeout(()=>{ window.location.href = 'obrigado.html'; }, 800);
   document.getElementById('suc-ov').classList.add('show');
   ['fn','fp','fc','fd','fobs'].forEach(id=>document.getElementById(id).value='');
@@ -1383,7 +1836,7 @@ function submitBooking(){
 window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>55));
 const _fdEl = document.getElementById('fd');
 if(_fdEl) _fdEl.min = new Date().toISOString().split('T')[0];
-render();
+(async()=>await render())();
 </script>
 </body>
 </html>

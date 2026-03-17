@@ -218,6 +218,60 @@ input[type=file]{display:none;}
   .fr3{grid-template-columns:1fr;}
   .bsave{font-size:.65rem;padding:6px 10px;}
 }
+
+/* ── AGENDA ── */
+.dia-card{background:var(--bg4);border:1px solid var(--bord2);border-radius:5px;padding:12px 14px;margin-bottom:8px;}
+.dia-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.dia-nome{font-weight:600;font-size:.84rem;color:var(--gold);}
+.dia-ativo{display:flex;align-items:center;gap:8px;font-size:.75rem;color:var(--grey);}
+.turno-row{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end;margin-bottom:6px;}
+.turno-row label{font-size:.58rem;}
+.add-turno{background:rgba(201,168,76,.05);border:1px dashed rgba(201,168,76,.18);color:var(--gold);padding:5px 10px;font-size:.65rem;letter-spacing:1px;cursor:pointer;border-radius:3px;font-family:'DM Sans',sans-serif;transition:all .2s;margin-top:4px;}
+.add-turno:hover{background:rgba(201,168,76,.12);}
+.bloqueio-row{display:flex;gap:6px;align-items:center;margin-bottom:5px;}
+.bloqueio-row input[type=date]{flex:1;}
+.dur-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;}
+.dur-item{background:var(--bg4);border:1px solid var(--bord2);border-radius:4px;padding:10px 12px;}
+.dur-item label{margin-bottom:6px;font-size:.6rem;}
+.dur-row{display:flex;align-items:center;gap:8px;}
+.dur-row input[type=number]{width:70px;}
+.dur-unit{font-size:.72rem;color:var(--grey);}
+
+
+/* ── HISTÓRICO ── */
+.hist-row{background:var(--bg4);border:1px solid var(--bord2);border-radius:4px;padding:10px 13px;margin-bottom:6px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start;}
+.hist-info{font-size:.79rem;}
+.hist-nome{font-weight:600;margin-bottom:2px;}
+.hist-det{font-size:.71rem;color:var(--grey);line-height:1.55;}
+.hist-status{display:flex;flex-direction:column;align-items:flex-end;gap:5px;}
+.stag{font-size:.6rem;padding:3px 8px;border-radius:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;}
+.stag.pendente {background:rgba(249,115,22,.15);color:#f97316;border:1px solid rgba(249,115,22,.3);}
+.stag.confirmado{background:rgba(59,130,246,.15);color:#3b82f6;border:1px solid rgba(59,130,246,.3);}
+.stag.concluido {background:rgba(34,197,94,.15);color:#22c55e;border:1px solid rgba(34,197,94,.3);}
+.stag.cancelado {background:rgba(239,68,68,.1);color:#ef4444;border:1px solid rgba(239,68,68,.25);}
+.hist-novo{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--orange);margin-left:4px;vertical-align:middle;}
+/* ── CUPONS ── */
+.cup-row{background:var(--bg4);border:1px solid var(--bord2);border-radius:5px;padding:11px 13px;margin-bottom:7px;}
+.cup-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.cup-code{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;color:var(--gold);}
+.cup-uses{font-size:.68rem;color:var(--grey);}
+/* ── MANUTENÇÃO ── */
+.maint-box{border:2px solid rgba(59,130,246,.22);border-radius:7px;overflow:hidden;transition:border-color .2s;}
+.maint-box.on{border-color:rgba(239,68,68,.5);}
+.maint-head{background:rgba(59,130,246,.06);padding:11px 14px;display:flex;justify-content:space-between;align-items:center;}
+.maint-head.on{background:rgba(239,68,68,.06);}
+.maint-head h3{font-size:.88rem;font-weight:600;color:#3b82f6;}
+.maint-head.on h3{color:#ef4444;}
+
+
+/* ── TEMA ADMIN ── */
+.tema-prev-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.tema-prev-card{border-radius:5px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:all .2s;}
+.tema-prev-card.ativo{border-color:var(--gold);}
+.tema-prev-top{height:40px;display:flex;align-items:center;justify-content:center;}
+.tema-prev-bot{padding:8px 10px;font-size:.72rem;text-align:center;}
+.tema-prev-card:hover{transform:translateY(-2px);}
+
 </style>
 </head>
 <body>
@@ -269,7 +323,12 @@ input[type=file]{display:none;}
       <div class="ni" onclick="nav('galeria',this)"><span class="nic">📷</span>Galeria de Fotos</div>
       <div class="ni" onclick="nav('depoimentos',this)"><span class="nic">⭐</span>Depoimentos</div>
       <div class="ni" onclick="nav('agendamento',this)"><span class="nic">📅</span>Agendamento</div>
+      <div class="ni" onclick="nav('agenda',this)"><span class="nic">🗓</span>Agenda / Horários</div>
       <div class="ni" onclick="nav('contato',this)"><span class="nic">📱</span>Contato</div>
+      <div class="ng">Operação</div>
+      <div class="ni" onclick="nav('historico',this)"><span class="nic">📋</span>Histórico<span class="nbadge" id="hbadge">0</span></div>
+      <div class="ni" onclick="nav('cupons',this)"><span class="nic">🎟</span>Cupons</div>
+      <div class="ni" onclick="nav('manutencao',this)"><span class="nic">🔧</span>Manutenção</div>
       <div class="ng">Conta</div>
       <div class="ni" onclick="nav('seguranca',this)"><span class="nic">🔒</span>Segurança</div>
     </nav>
@@ -284,7 +343,7 @@ input[type=file]{display:none;}
       <button class="hbtn" onclick="toggleSb()" aria-label="Menu">☰</button>
       <div class="tbl"><h2 id="ptitle">DASHBOARD</h2><p id="pdesc">Visão geral</p></div>
       <div class="tbr">
-        <button class="bexp" onclick="exportar()">⬇ Exportar config-site.js</button>
+        <button class="bexp" onclick="(async()=>{ await exportar(); })()">⬇ Exportar config-site.js</button>
         <button class="bsave" onclick="salvar()">💾 Salvar Tudo</button>
       </div>
     </div>
@@ -360,7 +419,30 @@ input[type=file]{display:none;}
       <!-- CORES -->
       <div class="panel" id="p-cores">
         <div class="card"><div class="cardh"><div class="tt">🎨 Cores do Site</div><button class="bsm" onclick="resetCores()">↺ Padrão</button></div><div class="cardb">
-          <div class="ib">Altere qualquer cor. Depois <strong>Salvar Tudo</strong> aplica no site imediatamente.</div>
+          <div class="ib">Altere qualquer cor ou escolha um <strong>tema pronto</strong> baseado na sua identidade visual.</div>
+
+          <!-- Temas prontos -->
+          <div class="sdiv">Temas Prontos</div>
+          <div class="tema-prev-grid">
+            <div class="tema-prev-card" id="tcard-dourado" onclick="aplicarTemaAdmin('dourado')">
+              <div class="tema-prev-top" style="background:linear-gradient(135deg,#0A0A0A,#1A1A1A)">
+                <span style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;color:#C9A84C">DOURADO</span>
+              </div>
+              <div class="tema-prev-bot" style="background:#111;color:#C9A84C">
+                ⭐ Clássico Dourado <span style="font-size:.55rem;opacity:.6">(alternativo)</span>
+              </div>
+            </div>
+            <div class="tema-prev-card" id="tcard-azul" onclick="aplicarTemaAdmin('azul')">
+              <div class="tema-prev-top" style="background:linear-gradient(135deg,#0A0E1A,#141B2D)">
+                <span style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;color:#4A90D9">AZUL</span>
+              </div>
+              <div class="tema-prev-bot" style="background:#0D1220;color:#4A90D9">
+                🚗 Azul Metálico <span style="font-size:.55rem;opacity:.6">(padrão)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sdiv">Personalizar Cores</div>
           <div class="cgrid" id="cgrid"></div>
         </div></div>
       </div>
@@ -426,7 +508,55 @@ input[type=file]{display:none;}
         </div></div>
       </div>
 
-            <!-- AGENDAMENTO -->
+      
+      <!-- AGENDA -->
+      <div class="panel" id="p-agenda">
+
+        <!-- Card: Horários por dia da semana -->
+        <div class="card"><div class="cardh"><div class="tt">🗓 Horários por Dia da Semana</div></div><div class="cardb">
+          <div class="ib">Configure os <strong>turnos de atendimento</strong> de cada dia. Você pode ter vários turnos por dia (ex: manhã e tarde). Dias desativados não aparecem para o cliente.</div>
+          <div id="agenda-dias"></div>
+        </div></div>
+
+        <!-- Card: Datas bloqueadas -->
+        <div class="card"><div class="cardh"><div class="tt">🚫 Datas Bloqueadas / Folgas</div></div><div class="cardb">
+          <div class="ib">Bloqueie datas específicas — feriados, férias, compromissos. O cliente não verá horários disponíveis nessas datas.</div>
+          <div id="agenda-bloqueios"></div>
+          <button class="badd" onclick="addBloqueio()">+ Bloquear Data</button>
+        </div></div>
+
+        <!-- Card: Duração dos serviços -->
+        <div class="card"><div class="cardh"><div class="tt">⏱ Duração dos Serviços</div></div><div class="cardb">
+          <div class="ib">Defina quanto tempo cada serviço ocupa na agenda. Horários seguintes ficam bloqueados automaticamente durante esse período.</div>
+          <div class="dur-grid" id="agenda-duracoes"></div>
+        </div></div>
+
+        <!-- Card: Antecedência -->
+        <div class="card"><div class="cardh"><div class="tt">⚙️ Configurações Gerais</div></div><div class="cardb">
+          <div class="fr">
+            <div class="fg">
+              <label>Antecedência mínima (horas)</label>
+              <input type="number" id="ag-antec" min="0" max="72" value="2"
+                oninput="C.agenda.antecedenciaHoras=parseInt(this.value)||0"
+                placeholder="2">
+            </div>
+            <div class="fg">
+              <label>Máx. agendamentos por horário</label>
+              <input type="number" id="ag-max" min="1" max="10" value="1"
+                oninput="C.agenda.maxPorHorario=parseInt(this.value)||1"
+                placeholder="1">
+            </div>
+          </div>
+          <div class="fg">
+            <label>Mensagem quando sem horários disponíveis</label>
+            <input type="text" id="ag-msg" placeholder="Entre em contato pelo WhatsApp para verificar disponibilidade."
+              oninput="C.agenda.msgIndisponivel=this.value">
+          </div>
+        </div></div>
+
+      </div>
+
+      <!-- AGENDAMENTO -->
       <div class="panel" id="p-agendamento">
         <div class="card"><div class="cardh"><div class="tt">📅 Seção Agendamento</div></div><div class="cardb">
           <div class="ib">Use <strong>&lt;br&gt;</strong> para quebra de linha e <strong>&lt;span&gt;&lt;/span&gt;</strong> para palavra dourada.</div>
@@ -446,6 +576,58 @@ input[type=file]{display:none;}
         </div></div>
       </div>
 
+      <!-- HISTÓRICO -->
+      <div class="panel" id="p-historico">
+        <div class="card"><div class="cardh">
+          <div class="tt">📋 Histórico de Agendamentos</div>
+          <div style="display:flex;gap:6px">
+            <button class="bsm" onclick="filtrarHist('todos')">Todos</button>
+            <button class="bsm" onclick="filtrarHist('pendente')">Pendentes</button>
+            <button class="bsm" onclick="(async()=>{ await marcarTodosLidos(); })()">✓ Marcar Lidos</button>
+            <button class="bdel" onclick="(async()=>{ await limparHist(); })()">Limpar</button>
+          </div>
+        </div><div class="cardb">
+          <div class="ib">Cada agendamento enviado pelo WhatsApp aparece aqui. Clique no status para alterar.</div>
+          <div id="hist-stats" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;font-size:.72rem;color:var(--grey)"></div>
+          <div id="hist-lista"></div>
+        </div></div>
+      </div>
+
+      <!-- CUPONS -->
+      <div class="panel" id="p-cupons">
+        <div class="card"><div class="cardh">
+          <div class="tt">🎟 Cupons de Desconto</div>
+        </div><div class="cardb">
+          <div class="ib">Crie cupons com nome personalizado, % de desconto e limite de usos. O cliente digita o código na calculadora ou no formulário.</div>
+          <div id="cup-ed"></div>
+          <button class="badd" onclick="addCupom()">+ Novo Cupom</button>
+        </div></div>
+      </div>
+
+      <!-- MANUTENÇÃO -->
+      <div class="panel" id="p-manutencao">
+        <div class="card"><div class="cardh"><div class="tt">🔧 Modo Manutenção</div></div><div class="cardb">
+          <div class="ib">Quando ativado, o site exibe uma página de "Voltamos logo" com sua mensagem e botão do WhatsApp. Ideal para férias ou quando está lotado.</div>
+          <div class="maint-box" id="maint-box">
+            <div class="maint-head" id="maint-head">
+              <h3 id="maint-status-txt">● Site Online</h3>
+              <label class="sw"><input type="checkbox" id="maint-toggle" onchange="toggleMaint(this.checked)"><span class="sl"></span></label>
+            </div>
+            <div style="padding:14px">
+              <div class="fg"><label>Título da página</label><input type="text" id="maint-titulo" value="Voltamos em breve!" oninput="C.manutencao.titulo=this.value"></div>
+              <div class="fg"><label>Mensagem</label><textarea id="maint-msg" rows="2" oninput="C.manutencao.mensagem=this.value">Estamos em manutenção ou com agenda cheia. Entre em contato pelo WhatsApp!</textarea></div>
+              <div class="fg"><label>Data de retorno (opcional)</label><input type="date" id="maint-data" oninput="C.manutencao.retorno=this.value"></div>
+            </div>
+          </div>
+        </div></div>
+        <div class="card"><div class="cardh"><div class="tt">💾 Backup Manual</div></div><div class="cardb">
+          <div class="ib">Baixe um backup completo de todas as configurações. Guarde em local seguro.</div>
+          <button class="bpri" onclick="(async()=>{ await fazerBackup(); })()">⬇ Baixar Backup Agora</button>
+          <div id="ultimo-backup" style="font-size:.7rem;color:var(--grey);margin-top:8px"></div>
+        </div></div>
+      </div>
+
+      <!-- SEGURANÇA -->
       <!-- SEGURANÇA -->
       <div class="panel" id="p-seguranca">
         <div class="card"><div class="cardh"><div class="tt">🔒 Alterar Senha</div></div><div class="cardb">
@@ -539,6 +721,66 @@ const IDB = (() => {
   return { set, get, del, keys, resolveGallery };
 })();
 
+
+// ═══════════════════════════════════════
+// INDEXEDDB — HISTÓRICO DE AGENDAMENTOS
+// ═══════════════════════════════════════
+const IDB_HIST = (() => {
+  const DB='amigos_hist', ST='agendamentos';
+  let _db=null;
+  function open(){
+    return new Promise((res,rej)=>{
+      if(_db) return res(_db);
+      const req=indexedDB.open(DB,1);
+      req.onupgradeneeded=e=>{
+        const db=e.target.result;
+        if(!db.objectStoreNames.contains(ST))
+          db.createObjectStore(ST,{keyPath:'id',autoIncrement:true});
+      };
+      req.onsuccess=e=>{_db=e.target.result;res(_db);};
+      req.onerror=e=>rej(e);
+    });
+  }
+  async function add(item){
+    const db=await open();
+    return new Promise((res,rej)=>{
+      const tx=db.transaction(ST,'readwrite');
+      tx.objectStore(ST).add({...item,novo:true,status:'pendente',ts:Date.now()});
+      tx.oncomplete=res; tx.onerror=rej;
+    });
+  }
+  async function update(id,changes){
+    const db=await open();
+    return new Promise(async(res,rej)=>{
+      const tx=db.transaction(ST,'readwrite');
+      const store=tx.objectStore(ST);
+      const req=store.get(id);
+      req.onsuccess=e=>{
+        const item={...e.target.result,...changes};
+        store.put(item);
+      };
+      tx.oncomplete=res; tx.onerror=rej;
+    });
+  }
+  async function getAll(){
+    const db=await open();
+    return new Promise((res,rej)=>{
+      const req=db.transaction(ST).objectStore(ST).getAll();
+      req.onsuccess=e=>res(e.target.result.reverse()); // mais recente primeiro
+      req.onerror=rej;
+    });
+  }
+  async function clear(){
+    const db=await open();
+    return new Promise((res,rej)=>{
+      const tx=db.transaction(ST,'readwrite');
+      tx.objectStore(ST).clear();
+      tx.oncomplete=res; tx.onerror=rej;
+    });
+  }
+  return {add,update,getAll,clear};
+})();
+
 // ═══════════════════════════════════════
 // UTILS GLOBAIS
 // ═══════════════════════════════════════
@@ -552,8 +794,13 @@ function mp(s){let r='';for(let i=0;i<s.length;i++)r+=s.charCodeAt(i).toString(1
 function toggleEye(id,btn){const e=document.getElementById(id);e.type=e.type==='password'?'text':'password';btn.textContent=e.type==='password'?'👁':'🙈';}
 
 function initAuth(){
-  if(!localStorage.getItem('ad_ph'))localStorage.setItem('ad_ph',mp('53920227'));
-  if(!localStorage.getItem('ad_u'))localStorage.setItem('ad_u','Felipe');
+  const VER = 'v11'; // mude isso para forçar reset de credenciais em novas versões
+  if(localStorage.getItem('ad_ver') !== VER){
+    // Nova versão — resetar hash para garantir compatibilidade
+    localStorage.setItem('ad_ph', mp('53920227'));
+    localStorage.setItem('ad_u',  'Felipe');
+    localStorage.setItem('ad_ver', VER);
+  }
 }
 
 function login(){
@@ -563,12 +810,9 @@ function login(){
   const sh=localStorage.getItem('ad_ph');
   if(u.toLowerCase()===su.toLowerCase()&&mp(p)===sh){
     document.getElementById('lerr').style.display='none';
-    document.getElementById('LOGIN').classList.add('out');
-    document.getElementById('APP').classList.add('on');
-    document.getElementById('un').textContent=su;
-    document.getElementById('uav').textContent=su[0].toUpperCase();
-    document.getElementById('s-nu').value=su;
-    carregarTudo();
+    sessionStorage.setItem('ad_sess', '1'); // manter sessão ao atualizar
+    sessionStorage.setItem('ad_sess_u', su);
+    abrirApp(su);
   } else {
     document.getElementById('lerr').style.display='block';
     document.getElementById('lp').value='';
@@ -576,7 +820,18 @@ function login(){
   }
 }
 
+function abrirApp(su){
+  document.getElementById('LOGIN').classList.add('out');
+  document.getElementById('APP').classList.add('on');
+  document.getElementById('un').textContent=su;
+  document.getElementById('uav').textContent=su[0].toUpperCase();
+  document.getElementById('s-nu').value=su;
+  carregarTudo();
+}
+
 function logout(){
+  sessionStorage.removeItem('ad_sess');
+  sessionStorage.removeItem('ad_sess_u');
   document.getElementById('APP').classList.remove('on');
   document.getElementById('LOGIN').classList.remove('out');
   document.getElementById('lu').value='';
@@ -624,7 +879,12 @@ const PMETA={
   tamanhos:['TAMANHOS P/M/G','Portes de veículo'],servicos:['SERVIÇOS','Categorias e preços'],
   pacotes:['PACOTES','Combos e preços'],promocoes:['PROMOÇÕES','Ofertas temporárias'],
   galeria:['GALERIA','Fotos antes/depois'],depoimentos:['DEPOIMENTOS','Avaliações de clientes'],agendamento:['AGENDAMENTO','Textos e diferenciais'],
-  contato:['CONTATO','Seção final'],seguranca:['SEGURANÇA','Senha e usuário']
+  agenda:['AGENDA / HORÁRIOS','Disponibilidade e duração dos serviços'],
+  contato:['CONTATO','Seção final'],
+  historico:['HISTÓRICO','Agendamentos recebidos'],
+  cupons:['CUPONS','Descontos e promoções'],
+  manutencao:['MANUTENÇÃO','Modo manutenção e backup'],
+  seguranca:['SEGURANÇA','Senha e usuário']
 };
 
 // ═══════════════════════════════════════
@@ -644,7 +904,11 @@ function nav(id,el){
   if(id==='servicos')rSv();
   if(id==='pacotes')rPac();
   if(id==='promocoes')rPr();
-  if(id==='galeria')rGal();
+  if(id==='galeria')(async()=>await rGal())();
+  if(id==='historico'){(async()=>{await rHist();await marcarTodosLidos();})();}
+  if(id==='cupons')rCupons();
+  if(id==='manutencao')rMaint();
+  if(id==='agenda')rAgenda();
   if(id==='depoimentos')rDep();
 }
 
@@ -660,6 +924,14 @@ function carregarTudo(){
   // merge: garante que TODOS os campos existam
   C=Object.assign({},base);
   C.cores    =Object.assign({},CDEF,C.cores||{});
+  if(!C.temaPadrao) C.temaPadrao = 'azul';
+  // Marcar card ativo nos temas
+  setTimeout(()=>{
+    ['dourado','azul'].forEach(t=>{
+      const el=document.getElementById('tcard-'+t);
+      if(el) el.className='tema-prev-card'+(C.temaPadrao===t?' ativo':'');
+    });
+  }, 50);
   C.promocoes=Array.isArray(C.promocoes)?C.promocoes:[];
   C.services =Array.isArray(C.services)?C.services:[];
   C.pacotes  =Array.isArray(C.pacotes)?C.pacotes:[];
@@ -670,6 +942,54 @@ function carregarTudo(){
 
   const depAtEl = document.getElementById('dep-ativo');
   if(depAtEl) depAtEl.checked = C.depoimentosAtivos;
+
+  // Cupons
+  if(!Array.isArray(C.cupons)) C.cupons = [];
+
+  // Manutenção
+  if(!C.manutencao) C.manutencao = {ativo:false,titulo:'Voltamos em breve!',mensagem:'Estamos em manutenção. Entre em contato pelo WhatsApp!',retorno:''};
+
+  // Backup automático semanal (só após carregamento completo)
+  const ultimoBkp = localStorage.getItem('ad_last_backup');
+  const semana = 7*24*3600*1000;
+  if(!ultimoBkp || Date.now()-parseInt(ultimoBkp) > semana){
+    setTimeout(()=>{
+      // Não chama coletar() — só salva o que já está no localStorage
+      const bkpData = {
+        versao:'amigos_v11',
+        geradoEm:new Date().toISOString(),
+        config: JSON.parse(localStorage.getItem('amigos_cfg')||'{}'),
+        silencioso: true
+      };
+      localStorage.setItem('ad_last_backup', Date.now().toString());
+      const ubEl = document.getElementById('ultimo-backup');
+      if(ubEl) ubEl.textContent = 'Último backup auto: '+new Date().toLocaleString('pt-BR');
+    }, 3000);
+  }
+  const ubEl = document.getElementById('ultimo-backup');
+  if(ubEl && ultimoBkp) ubEl.textContent = 'Último backup: '+new Date(parseInt(ultimoBkp)).toLocaleString('pt-BR');
+
+  // Agenda
+  if (!C.agenda) C.agenda = {};
+  const defDias = [
+    {dow:0,nome:'Domingo',   ativo:false, turnos:[]},
+    {dow:1,nome:'Segunda',   ativo:true,  turnos:[{ini:'08:00',fim:'12:00'},{ini:'13:00',fim:'17:00'}]},
+    {dow:2,nome:'Terça',     ativo:true,  turnos:[{ini:'08:00',fim:'12:00'},{ini:'13:00',fim:'17:00'}]},
+    {dow:3,nome:'Quarta',    ativo:true,  turnos:[{ini:'08:00',fim:'12:00'},{ini:'13:00',fim:'17:00'}]},
+    {dow:4,nome:'Quinta',    ativo:true,  turnos:[{ini:'08:00',fim:'12:00'},{ini:'13:00',fim:'17:00'}]},
+    {dow:5,nome:'Sexta',     ativo:true,  turnos:[{ini:'08:00',fim:'12:00'},{ini:'13:00',fim:'17:00'}]},
+    {dow:6,nome:'Sábado',    ativo:true,  turnos:[{ini:'08:00',fim:'12:00'}]},
+  ];
+  if (!Array.isArray(C.agenda.dias) || C.agenda.dias.length !== 7) C.agenda.dias = defDias;
+  if (!Array.isArray(C.agenda.bloqueios)) C.agenda.bloqueios = [];
+  if (!C.agenda.duracoes) C.agenda.duracoes = {};
+  if (C.agenda.antecedenciaHoras === undefined) C.agenda.antecedenciaHoras = 2;
+  if (C.agenda.maxPorHorario    === undefined) C.agenda.maxPorHorario     = 1;
+  if (!C.agenda.msgIndisponivel) C.agenda.msgIndisponivel = 'Entre em contato pelo WhatsApp para verificar disponibilidade.';
+
+  sv2('ag-antec', C.agenda.antecedenciaHoras);
+  sv2('ag-max',   C.agenda.maxPorHorario);
+  sv2('ag-msg',   C.agenda.msgIndisponivel);
 
   // preencher campos de texto
   sv2('e-bn',C.businessName); sv2('e-tg',C.tagline);
@@ -716,6 +1036,13 @@ function dash(){
   const b=document.getElementById('pbadge'),t=(C.promocoes||[]).length;
   if(t>0){b.textContent=t;b.style.display='inline';b.className=pa>0?'nbadge g':'nbadge';}
   else b.style.display='none';
+  // Badge histórico (novos não lidos)
+  (async()=>{
+    const hist = await IDB_HIST.getAll();
+    const novos = hist.filter(h=>h.novo).length;
+    const hb = document.getElementById('hbadge');
+    if(hb){hb.textContent=novos;hb.style.display=novos>0?'inline':'none';hb.className=novos>0?'nbadge':'nbadge';}
+  })();
   // Verificar espaço no localStorage
   try {
     const used = new Blob([localStorage.getItem('amigos_cfg')||'']).size;
@@ -777,6 +1104,24 @@ async function exportar(){
 // ═══════════════════════════════════════
 // CORES
 // ═══════════════════════════════════════
+function aplicarTemaAdmin(tema){
+  const TEMAS = {
+    dourado: {gold:'#C9A84C',goldLight:'#E8C96A',bgPrimary:'#0A0A0A',bgDark:'#111111',bgCard:'#1A1A1A',textPrimary:'#F5F0E8',textGrey:'#888888',accentPromo:'#f97316'},
+    azul:    {gold:'#4A90D9',goldLight:'#6AAEE8',bgPrimary:'#0A0E1A',bgDark:'#0D1220',bgCard:'#141B2D',textPrimary:'#E8EDF5',textGrey:'#7A8BA0',accentPromo:'#3B82F6'},
+  };
+  if(!TEMAS[tema]) return;
+  C.cores = {...TEMAS[tema]};
+  C.temaPadrao = tema;
+  rCores();
+  // Atualizar cards
+  ['dourado','azul'].forEach(t=>{
+    const el=document.getElementById('tcard-'+t);
+    if(el) el.className='tema-prev-card'+(tema===t?' ativo':'');
+  });
+  const nomes = {azul:'Azul Metálico 🚗', dourado:'Clássico Dourado ⭐'};
+  toast((nomes[tema]||tema)+' aplicado! Clique em Salvar Tudo para publicar.','ok');
+}
+
 function rCores(){
   const co=C.cores||CDEF;
   document.getElementById('cgrid').innerHTML=Object.keys(CDEF).map(k=>`
@@ -954,6 +1299,185 @@ function addPromo(){C.promocoes.push({titulo:'NOVA PROMOÇÃO',servico:'',desc:'
 function rmPromo(i){if(confirm('Remover promoção?')){C.promocoes.splice(i,1);rPr();dash();}}
 
 // ═══════════════════════════════════════
+// HISTÓRICO
+// ═══════════════════════════════════════
+let _histFiltro = 'todos';
+async function rHist(){
+  const lista = await IDB_HIST.getAll();
+  const el = document.getElementById('hist-lista');
+  const statsEl = document.getElementById('hist-stats');
+  if(!lista.length){
+    el.innerHTML='<div style="text-align:center;padding:20px;color:var(--grey);font-size:.81rem;border:1px dashed var(--bord);border-radius:4px">Nenhum agendamento ainda.</div>';
+    if(statsEl) statsEl.innerHTML='';
+    return;
+  }
+  // Stats
+  const cnt = {pendente:0,confirmado:0,concluido:0,cancelado:0};
+  lista.forEach(h=>cnt[h.status]=(cnt[h.status]||0)+1);
+  if(statsEl) statsEl.innerHTML = Object.entries(cnt).map(([k,v])=>
+    `<span class="stag ${k}" style="cursor:default">${v} ${k}</span>`).join('');
+
+  const filtrados = _histFiltro==='todos' ? lista : lista.filter(h=>h.status===_histFiltro);
+  if(!filtrados.length){
+    el.innerHTML='<div style="color:var(--grey);font-size:.78rem;padding:8px">Nenhum item com este filtro.</div>';
+    return;
+  }
+  el.innerHTML = filtrados.map(h=>`
+    <div class="hist-row" id="hrow-${h.id}">
+      <div class="hist-info">
+        <div class="hist-nome">${h.nome||'—'}${h.novo?'<span class="hist-novo"></span>':''}</div>
+        <div class="hist-det">
+          📱 ${h.whatsapp||'—'} &nbsp;|&nbsp; 🚗 ${h.veiculo||'—'}${h.porte?' ('+h.porte+')':''}<br>
+          🔧 ${h.servico||'—'} &nbsp;|&nbsp; 📅 ${h.data||'—'}${h.horario?' às '+h.horario:''}<br>
+          ${h.obs?'📝 '+h.obs+'<br>':''}
+          <span style="font-size:.65rem;color:rgba(119,119,119,.6)">${new Date(h.ts).toLocaleString('pt-BR')}</span>
+        </div>
+      </div>
+      <div class="hist-status">
+        <select class="stag ${h.status}" onchange="mudarStatus(${h.id},this)" style="cursor:pointer;outline:none;background:transparent;border:none;font-family:'DM Sans',sans-serif;font-size:.6rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:inherit;">
+          <option value="pendente"  ${h.status==='pendente'  ?'selected':''}>⏳ Pendente</option>
+          <option value="confirmado"${h.status==='confirmado'?'selected':''}>✅ Confirmado</option>
+          <option value="concluido" ${h.status==='concluido' ?'selected':''}>🏁 Concluído</option>
+          <option value="cancelado" ${h.status==='cancelado' ?'selected':''}>❌ Cancelado</option>
+        </select>
+        <button class="bdel" onclick="(async()=>{ await delHist(${h.id}); })()" style="font-size:.6rem;padding:3px 7px">🗑</button>
+      </div>
+    </div>`).join('');
+}
+async function mudarStatus(id,sel){
+  await IDB_HIST.update(id,{status:sel.value,novo:false});
+  sel.className='stag '+sel.value;
+  dash();
+}
+async function delHist(id){
+  if(!confirm('Remover este agendamento?')) return;
+  // remove via update marcando como deletado — ou usar clear individual
+  const db = await (async()=>{
+    return new Promise(res=>{
+      const r=indexedDB.open('amigos_hist',1);
+      r.onsuccess=e=>res(e.target.result);
+    });
+  })();
+  const tx=db.transaction('agendamentos','readwrite');
+  tx.objectStore('agendamentos').delete(id);
+  tx.oncomplete=()=>{rHist();dash();};
+}
+async function marcarTodosLidos(){
+  const lista=await IDB_HIST.getAll();
+  await Promise.all(lista.filter(h=>h.novo).map(h=>IDB_HIST.update(h.id,{novo:false})));
+  dash();
+}
+function filtrarHist(f){ _histFiltro=f; (async()=>await rHist())(); }
+async function limparHist(){
+  if(!confirm('Limpar TODO o histórico? Esta ação não pode ser desfeita.')) return;
+  await IDB_HIST.clear(); rHist(); dash();
+}
+
+// ═══════════════════════════════════════
+// CUPONS
+// ═══════════════════════════════════════
+function rCupons(){
+  const el=document.getElementById('cup-ed');
+  if(!(C.cupons||[]).length){
+    el.innerHTML='<div style="text-align:center;padding:16px;color:var(--grey);font-size:.81rem;border:1px dashed var(--bord);border-radius:4px">Nenhum cupom. Clique em "+ Novo Cupom".</div>';
+    return;
+  }
+  el.innerHTML=(C.cupons||[]).map((cp,ci)=>`
+    <div class="cup-row">
+      <div class="cup-header">
+        <div>
+          <span class="cup-code">${cp.codigo||'CUPOM'}</span>
+          <span class="cup-uses"> — ${cp.usosRealizados||0}/${cp.usosMax||999} usos &nbsp;|&nbsp; ${cp.desconto||0}% off</span>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;">
+          <label class="sw" style="width:32px;height:18px"><input type="checkbox" ${cp.ativo!==false?'checked':''} onchange="C.cupons[${ci}].ativo=this.checked"><span class="sl"></span></label>
+          <button class="bdel" onclick="rmCupom(${ci})">Remover</button>
+        </div>
+      </div>
+      <div class="fr3">
+        <div class="fg"><label>Código do Cupom</label>
+          <input type="text" value="${cp.codigo||''}" placeholder="AMIGOS10"
+            style="text-transform:uppercase;letter-spacing:2px;font-weight:600"
+            oninput="C.cupons[${ci}].codigo=this.value.toUpperCase();this.value=this.value.toUpperCase()">
+        </div>
+        <div class="fg"><label>Desconto (%)</label>
+          <input type="number" min="1" max="100" value="${cp.desconto||10}"
+            oninput="C.cupons[${ci}].desconto=parseInt(this.value)||0">
+        </div>
+        <div class="fg"><label>Usos máximos</label>
+          <input type="number" min="1" value="${cp.usosMax||999}"
+            oninput="C.cupons[${ci}].usosMax=parseInt(this.value)||999">
+        </div>
+      </div>
+      <div class="fg"><label>Descrição (aparece para o cliente)</label>
+        <input type="text" value="${cp.descricao||''}" placeholder="Ex: 10% de desconto no primeiro serviço"
+          oninput="C.cupons[${ci}].descricao=this.value">
+      </div>
+      <div style="font-size:.7rem;color:var(--grey)">Usos realizados: <strong style="color:var(--white)">${cp.usosRealizados||0}</strong>
+        <button class="bsm" style="margin-left:8px;font-size:.6rem" onclick="C.cupons[${ci}].usosRealizados=0;rCupons();toast('Contador zerado.','ok')">Zerar contador</button>
+      </div>
+    </div>`).join('');
+}
+function addCupom(){
+  C.cupons.push({codigo:'',desconto:10,usosMax:100,usosRealizados:0,descricao:'',ativo:true});
+  rCupons();
+}
+function rmCupom(i){if(confirm('Remover cupom?')){C.cupons.splice(i,1);rCupons();}}
+
+// ═══════════════════════════════════════
+// MANUTENÇÃO
+// ═══════════════════════════════════════
+function rMaint(){
+  const m=C.manutencao||{};
+  const tog=document.getElementById('maint-toggle');
+  const box=document.getElementById('maint-box');
+  const head=document.getElementById('maint-head');
+  const stxt=document.getElementById('maint-status-txt');
+  if(tog) tog.checked=!!m.ativo;
+  if(box) box.className='maint-box'+(m.ativo?' on':'');
+  if(head) head.className='maint-head'+(m.ativo?' on':'');
+  if(stxt) stxt.textContent=m.ativo?'⚠️ Site em Manutenção':'● Site Online';
+  const el=id=>document.getElementById(id);
+  if(el('maint-titulo')) el('maint-titulo').value=m.titulo||'Voltamos em breve!';
+  if(el('maint-msg'))    el('maint-msg').value=m.mensagem||'';
+  if(el('maint-data'))   el('maint-data').value=m.retorno||'';
+}
+function toggleMaint(ativo){
+  if(ativo && !confirm('Ativar modo manutenção? O site ficará inacessível para os clientes até você desativar.')){
+    document.getElementById('maint-toggle').checked=false; return;
+  }
+  C.manutencao.ativo=ativo;
+  rMaint();
+  salvar();
+  toast(ativo?'⚠️ Modo manutenção ATIVADO — salvo!':'✅ Site online novamente — salvo!', ativo?'err':'ok');
+}
+
+// ═══════════════════════════════════════
+// BACKUP
+// ═══════════════════════════════════════
+async function fazerBackup(silencioso=false){
+  coletar();
+  const hist=await IDB_HIST.getAll();
+  const backup={
+    versao:'amigos_v11',
+    geradoEm:new Date().toISOString(),
+    config:C,
+    historico:hist
+  };
+  if(!silencioso){
+    const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='backup-amigos-'+new Date().toISOString().slice(0,10)+'.json';
+    a.click();
+    toast('Backup baixado!','ok');
+  }
+  localStorage.setItem('ad_last_backup',Date.now().toString());
+  const ubEl=document.getElementById('ultimo-backup');
+  if(ubEl) ubEl.textContent='Último backup: '+new Date().toLocaleString('pt-BR');
+}
+
+// ═══════════════════════════════════════
 // DEPOIMENTOS
 // ═══════════════════════════════════════
 function rDep(){
@@ -994,6 +1518,97 @@ function addDep(){
 }
 function rmDep(i){if(confirm('Remover depoimento?')){C.depoimentos.splice(i,1);rDep();}}
 
+
+// ═══════════════════════════════════════
+// AGENDA
+// ═══════════════════════════════════════
+function rAgenda(){
+  rAgendaDias();
+  rAgendaBloqueios();
+  rAgendaDuracoes();
+}
+
+function rAgendaDias(){
+  const dias = C.agenda.dias;
+  document.getElementById('agenda-dias').innerHTML = dias.map((d,di)=>`
+    <div class="dia-card">
+      <div class="dia-header">
+        <span class="dia-nome">${d.nome}</span>
+        <div class="dia-ativo">
+          <span style="font-size:.72rem">${d.ativo?'<span style="color:var(--green)">● Ativo</span>':'<span style="color:var(--grey)">○ Inativo</span>'}</span>
+          <label class="sw"><input type="checkbox" ${d.ativo?'checked':''} onchange="C.agenda.dias[${di}].ativo=this.checked;rAgendaDias()"><span class="sl"></span></label>
+        </div>
+      </div>
+      ${d.ativo ? `
+        ${(d.turnos||[]).map((t,ti)=>`
+          <div class="turno-row">
+            <div class="fg"><label>Início</label>
+              <input type="time" value="${t.ini}" onchange="C.agenda.dias[${di}].turnos[${ti}].ini=this.value">
+            </div>
+            <div class="fg"><label>Fim (último horário)</label>
+              <input type="time" value="${t.fim}" onchange="C.agenda.dias[${di}].turnos[${ti}].fim=this.value">
+            </div>
+            <button class="bdel" style="margin-bottom:11px" onclick="rmTurno(${di},${ti})">×</button>
+          </div>`).join('')}
+        <button class="add-turno" onclick="addTurno(${di})">+ Adicionar Turno</button>
+      ` : `<div style="font-size:.75rem;color:var(--grey);padding:4px 0">Dia desativado — não aparece para o cliente.</div>`}
+    </div>`).join('');
+}
+
+function addTurno(di){
+  C.agenda.dias[di].turnos.push({ini:'08:00',fim:'12:00'});
+  rAgendaDias();
+}
+function rmTurno(di,ti){
+  C.agenda.dias[di].turnos.splice(ti,1);
+  rAgendaDias();
+}
+
+function rAgendaBloqueios(){
+  const bl = C.agenda.bloqueios||[];
+  const el = document.getElementById('agenda-bloqueios');
+  if(!bl.length){
+    el.innerHTML='<div style="font-size:.78rem;color:var(--grey);padding:6px 0">Nenhuma data bloqueada.</div>';
+    return;
+  }
+  el.innerHTML = bl.map((b,bi)=>`
+    <div class="bloqueio-row">
+      <input type="date" value="${b.data}" onchange="C.agenda.bloqueios[${bi}].data=this.value">
+      <input type="text" placeholder="Motivo (opcional)" value="${b.motivo||''}"
+        style="flex:2" onchange="C.agenda.bloqueios[${bi}].motivo=this.value">
+      <button class="bdel" onclick="rmBloqueio(${bi})">×</button>
+    </div>`).join('');
+}
+function addBloqueio(){
+  const hoje = new Date().toISOString().split('T')[0];
+  C.agenda.bloqueios.push({data:hoje,motivo:''});
+  rAgendaBloqueios();
+}
+function rmBloqueio(i){ C.agenda.bloqueios.splice(i,1); rAgendaBloqueios(); }
+
+function rAgendaDuracoes(){
+  // Listar todos os serviços
+  const svcs = [];
+  (C.services||[]).forEach(cat=>(cat.servicos||[]).forEach(sv=>svcs.push(sv.nome)));
+  (C.pacotes||[]).forEach(p=>svcs.push('📦 '+p.nome));
+
+  if(!svcs.length){
+    document.getElementById('agenda-duracoes').innerHTML=
+      '<div style="color:var(--grey);font-size:.78rem">Cadastre serviços primeiro.</div>';
+    return;
+  }
+  document.getElementById('agenda-duracoes').innerHTML = svcs.map(nome=>`
+    <div class="dur-item">
+      <label>${nome}</label>
+      <div class="dur-row">
+        <input type="number" min="30" max="480" step="30"
+          value="${C.agenda.duracoes[nome]||60}"
+          onchange="C.agenda.duracoes['${nome.replace(/'/g,"\'")}'] = parseInt(this.value)||60">
+        <span class="dur-unit">min</span>
+      </div>
+    </div>`).join('');
+}
+
 // ═══════════════════════════════════════
 // GALERIA
 // ═══════════════════════════════════════
@@ -1009,7 +1624,7 @@ async function rGal(){
         <input type="text" value="${g.caption||''}" placeholder="Antes/Depois" onchange="C.gallery[${i}].caption=this.value">
         <div class="gact">
           <button class="bupl" onclick="trgUp(${i})">📁 Upload</button>
-          ${g.url?`<button class="bdelph" onclick="rmPh(${i})">🗑</button>`:''}
+          ${g.url?`<button class="bdelph" onclick="(async()=>{ await rmPh(${i}); })()">🗑</button>`:''}
         </div>
       </div>
     </div>`).join('');
@@ -1057,7 +1672,7 @@ async function rmPh(i){
   C.gallery[i].url='';
   rGal();dash();
 }
-function addGal(){C.gallery.push({url:'',caption:''});rGal();}
+function addGal(){C.gallery.push({url:'',caption:''});(async()=>await rGal())();}
 
 // ═══════════════════════════════════════
 // TOAST
@@ -1093,6 +1708,18 @@ nav=function(id,el){
 };
 
 initAuth();
+
+// Restaurar sessão se ainda válida (evita logout ao atualizar)
+(function restaurarSessao(){
+  const sess = sessionStorage.getItem('ad_sess');
+  const su   = sessionStorage.getItem('ad_sess_u') || localStorage.getItem('ad_u') || 'Felipe';
+  if(sess === '1'){
+    // Validar que as credenciais ainda existem no localStorage
+    if(localStorage.getItem('ad_ph')){
+      abrirApp(su);
+    }
+  }
+})();
 </script>
 </body>
 </html>
